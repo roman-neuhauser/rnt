@@ -1,0 +1,73 @@
+.. vim: ft=rst sts=2 sw=2 tw=70
+.. default-role:: literal
+
+======================================================================
+                                 rnt
+======================================================================
+----------------------------------------------------------------------
+             Automated testing of command line interfaces
+----------------------------------------------------------------------
+
+:Author: Roman Neuhauser
+:Contact: rneuhauser@suse.cz
+:Copyright: This document is in the public domain.
+
+.. This file is marked up using reStructuredText.
+   Lines beginning with ".." are reST directives.
+   "foo_" or "`foo bar`_" is a link, defined at ".. _foo" or
+   ".. _foo bar".
+   "::" introduces a literal block (usually some form of code).
+   "`foo`" is some kind of identifier.
+   Suspicious backslashes in the text ("`std::string`\s") are required
+   for reST to recognize the preceding character as syntax.
+
+
+Overview
+========
+
+rnt_ is a tool for automated testing of command line interfaces.
+It comprises two shell scripts portable enough to run at least on
+FreeBSD, GNU/Linux and MSYS (Windows).
+
+.. _rnt: https://github.com/roman-neuhauser/rnt
+
+rnt_ has notions of "test suite" and "test case".
+A test suite is a directory containing zero or more test cases.
+A test case is a directory with a name matching `???-*`, containing
+at least these files:
+
+* `cmd`
+* `out.expected`
+* `err.expected`
+* `exit.expected`
+
+`cmd` runs whatever command you're interested in.
+`out.expected` and `err.expected` contain output expected on
+`stdout` and `stderr`, respectively.
+`exit.expected` contains the expected exit code in decimal.
+
+`run-tests.sh` runs each case in the given suite, printing `.` (a dot)
+for a successful case, `F` for a failed one.
+After all test cases have been run, `run-tests.sh` prints details
+of failures (if any).
+
+
+Installation
+============
+
+Use `git submodule` in a project using git, `cp(1)` otherwise.
+
+Modify your `Makefile` to include a `check` target of the following
+structure:
+
+::
+
+  check: all
+    SHELL=$(SHELL) $(SHELL) <rnt>/run-tests.sh <suite> [args...]
+
+* `<rnt>` is the path to `rnt`.
+* `<suite>` is the path to your tests.
+* `[args...]` is any number of arguments (possibly none), these are
+  passed to each test.
+
+

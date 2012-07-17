@@ -2,7 +2,7 @@
 # Distributed under the MIT license (see LICENSE file)
 # vim: sw=2 sts=2 ts=2 et
 
-mypath="${0%/*}"
+mypath="$(dirname "$0")"
 
 testdir="${1:?}"; shift
 

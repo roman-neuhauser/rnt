@@ -10,7 +10,8 @@ cnt=0
 ex=0
 failures=
 
-for d in "$testdir"/???-*; do
+find "$testdir" -mindepth 1 -maxdepth 1 -name '???-*' \
+| while read d; do
   cnt=$((cnt + 1))
   "$SHELL" "$mypath/run-test.sh" "$d" ${1+"$@"}
   tex=$?

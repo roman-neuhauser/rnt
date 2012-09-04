@@ -6,6 +6,10 @@ curdir="$PWD"
 testdir="$1"; shift
 rm -f "$testdir"/*.actual
 cd "$testdir" || exit 1
+test -f ./cmd || {
+  echo "$0 $testdir: missing $testdir/cmd"
+  exit 2
+} >&2
 $SHELL ./cmd ${1+"$@"} >out.actual 2>err.actual
 ex=$?
 cd "$curdir"

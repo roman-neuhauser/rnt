@@ -10,8 +10,13 @@ cnt=0
 ex=0
 failures=
 
-find "$testdir" -mindepth 1 -maxdepth 1 -name '???-*' \
-| while read d; do
+list_tests()
+(
+  find "${1?}" -mindepth 1 -maxdepth 1 -type d \
+  | grep -E '^'"$1/"'[0-9]{3}(-[a-z0-9]+)+$'
+)
+
+for d in $(list_tests "${testdir%/}"); do
   cnt=$((cnt + 1))
   "$SHELL" "$mypath/run-test.sh" "$d" ${1+"$@"}
   tex=$?

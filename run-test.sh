@@ -4,16 +4,15 @@
 
 curdir="$PWD"
 testdir="$1"; shift
-rm -f "$testdir"/*.actual
 cd "$testdir" || exit 1
+rm -f err.actual out.actual exit.actual
 test -f ./cmd || {
   echo "$0 $testdir: missing $testdir/cmd"
   exit 2
 } >&2
 $SHELL ./cmd ${1+"$@"} >out.actual 2>err.actual
-ex=$?
+echo $? > exit.actual
 cd "$curdir"
-echo $ex > "$testdir"/exit.actual
 ex=0
 for exp in $(find "$testdir" -name \*.expected | sort); do
   act="${exp%.expected}.actual"

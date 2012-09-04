@@ -1,3 +1,4 @@
 .*.sw?
 .sw?
 README.html
+tests/**/*.actual

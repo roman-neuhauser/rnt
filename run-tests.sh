@@ -35,7 +35,7 @@ fcnt=0
 for f in $failures; do
   fcnt=$(($fcnt + 1))
   printf "FAIL $f\n\n"
-  find $f -name \*.diff | xargs cat
+  find $f -mindepth 1 -maxdepth 1 -name \*.diff | xargs cat
   printf "\n"
 done
 

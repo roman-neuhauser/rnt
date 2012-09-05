@@ -2,6 +2,11 @@
 # Distributed under the MIT license (see LICENSE file)
 # vim: sw=2 sts=2 ts=2 et
 
+expected()
+{
+  find "${1?}" -mindepth 1 -maxdepth 1 -name \*.expected | sort
+}
+
 curdir="$PWD"
 testdir="$1"; shift
 cd "$testdir" || exit 1
@@ -14,7 +19,7 @@ $SHELL ./cmd ${1+"$@"} >out.actual 2>err.actual
 echo $? > exit.actual
 cd "$curdir"
 ex=0
-for exp in $(find "$testdir" -name \*.expected | sort); do
+for exp in $(expected "$testdir"); do
   act="${exp%.expected}.actual"
   diff="${exp%.expected}.diff"
   diff -Nu --strip-trailing-cr "$exp" "$act" > "$diff.tmp"

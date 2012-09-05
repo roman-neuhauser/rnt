@@ -17,8 +17,10 @@ ex=0
 for exp in $(find "$testdir" -name \*.expected | sort); do
   act="${exp%.expected}.actual"
   diff="${exp%.expected}.diff"
-  diff -Nu --strip-trailing-cr "$exp" "$act" > "$diff"
+  diff -Nu --strip-trailing-cr "$exp" "$act" > "$diff.tmp"
   dex=$?
+  sed '1,2s/\t.*$//' < "$diff.tmp" > "$diff"
+  rm -f "$diff.tmp"
   if test 0 -ne $dex; then
     ex=$dex
   else

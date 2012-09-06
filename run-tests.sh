@@ -35,7 +35,7 @@ for d in $(list_tests "${testdir%/}"); do
   fi
 done
 
-printf "\n\n"
+test $cnt -gt 0 && printf "\n\n"
 
 fcnt=0
 for f in $failures; do

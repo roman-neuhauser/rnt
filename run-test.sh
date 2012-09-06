@@ -7,9 +7,16 @@ expected()
   find "${1?}" -mindepth 1 -maxdepth 1 -name \*.expected | sort
 }
 
+myname="$(basename "$0")"
+
 curdir="${PWD%/}"
 testdir="$1"; shift
-cd "$testdir" || exit 1
+
+test -d "$testdir" && cd "$testdir" || {
+  echo "$myname: not a dir: ${testdir#$PWD/}"
+  exit 1
+} >&2
+
 rm -f err.actual out.actual exit.actual
 test -f ./cmd || {
   echo "$0 $testdir: missing $testdir/cmd"

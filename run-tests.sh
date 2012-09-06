@@ -3,8 +3,14 @@
 # vim: sw=2 sts=2 ts=2 et
 
 mypath="$(dirname "$0")"
+myname="$(basename "$0")"
 
 testdir="${1:?}"; shift
+
+test -d "$testdir" && (cd "$testdir") || {
+  echo "$myname: not a dir: ${testdir#$PWD/}"
+  exit 1
+} >&2
 
 cnt=0
 ex=0

@@ -7,7 +7,7 @@ expected()
   find "${1?}" -mindepth 1 -maxdepth 1 -name \*.expected | sort
 }
 
-curdir="$PWD"
+curdir="${PWD%/}"
 testdir="$1"; shift
 cd "$testdir" || exit 1
 rm -f err.actual out.actual exit.actual
@@ -22,6 +22,8 @@ ex=0
 for exp in $(expected "$testdir"); do
   act="${exp%.expected}.actual"
   diff="${exp%.expected}.diff"
+  act="${act#$curdir/}"
+  exp="${exp#$curdir/}"
   diff -Nu --strip-trailing-cr "$exp" "$act" > "$diff.tmp"
   dex=$?
   sed '1,2s/\t.*$//' < "$diff.tmp" > "$diff"

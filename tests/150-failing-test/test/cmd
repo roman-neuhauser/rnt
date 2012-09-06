@@ -1,0 +1,3 @@
+echo unexpected output >&1
+echo unexpected error  >&2
+exit 42

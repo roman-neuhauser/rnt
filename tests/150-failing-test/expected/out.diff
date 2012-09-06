@@ -1,0 +1,5 @@
+--- test/out.expected
++++ test/out.actual
+@@ -1 +1 @@
+-no output expected
++unexpected output

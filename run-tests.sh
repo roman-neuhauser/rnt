@@ -6,9 +6,10 @@ mypath="$(dirname "$0")"
 myname="$(basename "$0")"
 
 testdir="${1:?}"; shift
+testdir="${testdir#$PWD/}"
 
 test -d "$testdir" && (cd "$testdir") || {
-  echo "$myname: not a dir: ${testdir#$PWD/}"
+  echo "$myname: not a dir: $testdir"
   exit 1
 } >&2
 

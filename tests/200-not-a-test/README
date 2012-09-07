@@ -1,0 +1,6 @@
+test run-test.sh error reporting
+
+- stderr should have a complaint about the test "dir";
+  the reported path should be relative to the parent dir
+- stdout should be empty
+- exit code should indicate failure

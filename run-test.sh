@@ -19,7 +19,7 @@ test -d "$testdir" && cd "$testdir" || {
 
 rm -f err.actual out.actual exit.actual
 test -f ./cmd || {
-  echo "$0 $testdir: missing $testdir/cmd"
+  echo "$myname ${testdir#$curdir/}: missing ${testdir#$curdir/}/cmd"
   exit 2
 } >&2
 $SHELL ./cmd ${1+"$@"} >out.actual 2>err.actual

@@ -1,0 +1,5 @@
+test run-test.sh error reporting
+
+- exit code should indicate failure
+- stderr should have a complaint about missing $test/cmd
+- stdout should be empty

@@ -1,0 +1,5 @@
+test for run-tests.sh <nonexistent-dir>
+
+- exit code should indicate failure
+- stderr should have some complaints
+- stdout should be empty

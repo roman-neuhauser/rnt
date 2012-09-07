@@ -1,0 +1,5 @@
+test for run-tests.sh <empty-dir>
+
+- exit code should indicate success
+- stderr should be empty
+- stdout should inform of zero tests, zero failures

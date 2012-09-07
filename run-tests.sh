@@ -41,6 +41,7 @@ fcnt=0
 for f in $failures; do
   fcnt=$(($fcnt + 1))
   printf "FAIL $f\n\n"
+  test -f "$f/README" && sed 's,^,# ,' "$f/README" && echo
   find $f -mindepth 1 -maxdepth 1 -name \*.diff | xargs cat
   printf "\n"
 done

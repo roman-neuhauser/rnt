@@ -1,0 +1,7 @@
+test for run-test.sh <failing-test>
+
+- exit code should indicate failure
+- stderr should be empty
+- stdout should be empty
+- for each of exit code, stdout, stderr that is different
+  from expected value, it should leave behind a diff file

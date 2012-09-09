@@ -24,6 +24,7 @@ test -f ./cmd || {
 } >&2
 
 rm -f err.actual out.actual exit.actual
+rm -f err.diff out.diff exit.diff
 
 $SHELL ./cmd ${1+"$@"} >out.actual 2>err.actual
 echo $? > exit.actual

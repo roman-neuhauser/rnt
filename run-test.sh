@@ -40,4 +40,9 @@ for exp in $(expected "$testdir"); do
     rm -f "$diff"
   fi
 done
+
+if test 0 -eq $ex; then
+  cd "$testdir" && rm -f err.actual out.actual exit.actual
+fi
+
 exit $ex

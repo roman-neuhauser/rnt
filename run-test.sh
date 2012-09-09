@@ -32,13 +32,11 @@ for exp in $(expected "$testdir"); do
   diff="${exp%.expected}.diff"
   diff -Nu --strip-trailing-cr "$exp" "$act" > "$diff.tmp"
   dex=$?
-  sed '1,2s/\t.*$//' < "$diff.tmp" > "$diff"
-  rm -f "$diff.tmp"
   if test 0 -ne $dex; then
+    sed '1,2s/\t.*$//' < "$diff.tmp" > "$diff"
     ex=$dex
-  else
-    rm -f "$diff"
   fi
+  rm -f "$diff.tmp"
 done
 
 if test 0 -eq $ex; then

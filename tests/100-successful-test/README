@@ -1,0 +1,7 @@
+successful test case run
+
+if stdout, stderr match expectations and exit code
+equals the expected value, run-test.sh should not
+output anything on either stdout or stderr and its
+exit code should indicate success.  it should wipe
+out *.actual, *.diff and *.diff.tmp files.

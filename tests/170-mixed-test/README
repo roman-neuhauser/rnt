@@ -1,0 +1,10 @@
+partially failing test case run
+
+if stdout, stderr or exit code does not match expectations,
+run-test.sh should not output anything on either stdout or
+stderr and its exit code should indicate failure.
+
+this test excercises failing err, exit diffs; stdout matches
+expectation.  out.diff, out.diff.tmp should be gone
+afterwards, .diff, .diff.tmp files for the other facets
+should be kept.  all .actual files should be kept.

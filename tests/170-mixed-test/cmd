@@ -1,0 +1,43 @@
+$SHELL ${2?} $PWD/test
+ex=$?
+
+cleanup()
+{
+  rm -f "$PWD/test/exit.actual"
+  rm -f "$PWD/test/err.actual"
+  rm -f "$PWD/test/out.actual"
+  rm -f "$PWD/test/exit.diff"
+  rm -f "$PWD/test/err.diff"
+  rm -f "$PWD/test/out.diff"
+}
+trap cleanup EXIT
+
+assert_nonexistent()
+{
+  test -e "${1:?}" && echo "exists but should not: $1" >&2
+}
+assert_file()
+{
+  test -f "${1:?}" || echo "expected file not found: $1" >&2
+}
+assert_same()
+{
+  diff -u "${1:?}" "${2:?}" >&2
+}
+
+assert_nonexistent "$PWD/test/out.diff"
+
+assert_nonexistent "$PWD/test/out.diff.tmp"
+assert_nonexistent "$PWD/test/err.diff.tmp"
+assert_nonexistent "$PWD/test/exit.diff.tmp"
+
+assert_file "$PWD/test/exit.actual"
+assert_file "$PWD/test/out.actual"
+assert_file "$PWD/test/err.actual"
+
+assert_file "$PWD/test/exit.diff"
+assert_file "$PWD/test/err.diff"
+assert_same "$PWD/expected/exit.diff" "$PWD/test/exit.diff"
+assert_same "$PWD/expected/err.diff" "$PWD/test/err.diff"
+
+exit $ex

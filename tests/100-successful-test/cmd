@@ -1,0 +1,18 @@
+$SHELL ${2:?} $PWD/test
+ex=$?
+
+assert_nonexistent()
+{
+  test -e "${1:?}" && echo "exists but should not: $1" >&2
+}
+assert_nonexistent "$PWD/test/exit.actual"
+assert_nonexistent "$PWD/test/err.actual"
+assert_nonexistent "$PWD/test/out.actual"
+assert_nonexistent "$PWD/test/exit.diff"
+assert_nonexistent "$PWD/test/err.diff"
+assert_nonexistent "$PWD/test/out.diff"
+assert_nonexistent "$PWD/test/exit.diff.tmp"
+assert_nonexistent "$PWD/test/err.diff.tmp"
+assert_nonexistent "$PWD/test/out.diff.tmp"
+
+exit $ex

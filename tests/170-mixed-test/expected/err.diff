@@ -1,0 +1,5 @@
+--- test/err.expected
++++ test/err.actual
+@@ -1 +1 @@
+-no errors expected
++unexpected error

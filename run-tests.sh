@@ -20,7 +20,8 @@ failures=
 list_tests()
 (
   find "${1?}" -mindepth 1 -maxdepth 1 -type d \
-  | grep -E '^'"$1/"'[0-9]{3}(-[a-z0-9]+)+$'
+  | grep -E '^'"$1/"'[0-9]{3}(-[a-z0-9]+)+$' \
+  | sort -n
 )
 
 for d in $(list_tests "${testdir%/}"); do

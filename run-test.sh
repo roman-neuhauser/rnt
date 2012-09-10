@@ -2,9 +2,9 @@
 # Distributed under the MIT license (see LICENSE file)
 # vim: sw=2 sts=2 ts=2 et
 
-expected()
+children()
 {
-  find "${1?}" -mindepth 1 -maxdepth 1 -name \*.expected | sort
+  find "${1?}" -mindepth 1 -maxdepth 1 -name "${2?}" | sort
 }
 
 myname="$(basename "$0")"
@@ -23,16 +23,17 @@ test -f ./cmd || {
   exit 2
 } >&2
 
-rm -f err.actual out.actual exit.actual
-rm -f err.diff out.diff exit.diff
+rm -f $(children . \*.actual)
+rm -f $(children . \*.diff)
 
 $SHELL ./cmd ${1+"$@"} >out.actual 2>err.actual
 echo $? > exit.actual
 cd "$curdir"
 ex=0
-for exp in $(expected "$testdir"); do
-  act="${exp%.expected}.actual"
-  diff="${exp%.expected}.diff"
+for act in $(children "$testdir" \*.actual); do
+  exp="${act%.actual}.expected"
+  diff="${act%.actual}.diff"
+  test -f "$exp" || continue
   diff -Nu --strip-trailing-cr "$exp" "$act" > "$diff.tmp"
   dex=$?
   if test 0 -ne $dex; then
@@ -43,7 +44,7 @@ for exp in $(expected "$testdir"); do
 done
 
 if test 0 -eq $ex; then
-  cd "$testdir" && rm -f err.actual out.actual exit.actual
+  rm -f $(children "$testdir" \*.actual)
 fi
 
 exit $ex

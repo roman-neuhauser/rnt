@@ -1,6 +1,8 @@
 $SHELL ${2?} $PWD/test
 ex=$?
 
+exec 3>dirstate.actual
+
 cleanup()
 {
   rm -f "$PWD/test/exit.actual"
@@ -14,21 +16,25 @@ trap cleanup EXIT
 
 assert_file()
 {
-  test -f "${1:?}" || echo "expected file not found: $1" >&2
-}
+  if test -e "${1:?}"; then
+    echo "exists: $1"
+  else
+    echo "missing: $1"
+  fi
+} >&3
 assert_same()
 {
-  diff -u "${1:?}" "${2:?}" >&2
-}
+  diff -u "${1:?}" "${2:?}"
+} >&3
 
-assert_file "$PWD/test/exit.actual"
-assert_file "$PWD/test/err.actual"
-assert_file "$PWD/test/out.actual"
-assert_file "$PWD/test/exit.diff"
-assert_file "$PWD/test/err.diff"
-assert_file "$PWD/test/out.diff"
-assert_same "$PWD/expected/exit.diff" "$PWD/test/exit.diff"
-assert_same "$PWD/expected/err.diff" "$PWD/test/err.diff"
-assert_same "$PWD/expected/out.diff" "$PWD/test/out.diff"
+assert_file "test/exit.actual"
+assert_file "test/err.actual"
+assert_file "test/out.actual"
+assert_file "test/exit.diff"
+assert_file "test/err.diff"
+assert_file "test/out.diff"
+assert_same "expected/exit.diff" "test/exit.diff"
+assert_same "expected/err.diff" "test/err.diff"
+assert_same "expected/out.diff" "test/out.diff"
 
 exit $ex

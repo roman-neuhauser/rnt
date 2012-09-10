@@ -1,0 +1,12 @@
+nonexistent: test/err.actual
+nonexistent: test/err.diff
+nonexistent: test/err.diff.tmp
+nonexistent: test/exit.actual
+nonexistent: test/exit.diff
+nonexistent: test/exit.diff.tmp
+nonexistent: test/other.actual
+nonexistent: test/other.diff
+nonexistent: test/other.diff.tmp
+nonexistent: test/out.actual
+nonexistent: test/out.diff
+nonexistent: test/out.diff.tmp

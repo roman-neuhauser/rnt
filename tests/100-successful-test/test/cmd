@@ -1,3 +1,4 @@
 echo expected stdout
 echo expected stderr >&2
+echo expected other > other.actual
 exit 42

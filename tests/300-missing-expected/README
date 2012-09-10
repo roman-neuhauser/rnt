@@ -1,0 +1,1 @@
+run-test.sh should treat a missing foo.expected as empty

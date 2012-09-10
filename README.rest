@@ -34,22 +34,20 @@ FreeBSD, GNU/Linux and MSYS (Windows).
 rnt_ has notions of "test suite" and "test case".
 A test suite is a directory containing zero or more test cases.
 A test case is a directory with a name matching `???-*`, containing
-at least these files:
+at least a `cmd` file.
 
-* `cmd`
-* `out.expected`
-* `err.expected`
-* `exit.expected`
-
-`cmd` runs whatever command you're interested in.
-`out.expected` and `err.expected` contain output expected on
-`stdout` and `stderr`, respectively.
-`exit.expected` contains the expected exit code in decimal.
+For each test case, `run-test.sh` chdirs into the test case directory
+and runs `cmd`, storing stdout, stderr and the exit code in
+`out.actual`, `err.actual` and `exit.actual`, respectively.
+After that, each pair of `foo.expected`, `foo.actual` gets diffed;
+if only one side exists, the other will be considered empty.
+If any pair has non-empty diff, the test is considered *failed*.
 
 `run-tests.sh` runs each case in the given suite, printing `.` (a dot)
 for a successful case, `F` for a failed one.
 After all test cases have been run, `run-tests.sh` prints details
-of failures (if any).
+of failures (if any): for each failed test, its `README` file is
+output if it exists, followed by the diffs.
 
 
 Installation

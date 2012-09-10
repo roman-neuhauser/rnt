@@ -4,7 +4,15 @@
 
 children()
 {
-  find "${1?}" -mindepth 1 -maxdepth 1 -name "${2?}" | sort
+  find "${1?}" -mindepth 1 -maxdepth 1 -name "${2?}"
+}
+outputs()
+{
+  local testdir="${1?}"
+  {
+    children "$testdir" \*.expected | sed 's#expected$#actual#'
+    children "$testdir" \*.actual
+  } | sort
 }
 
 myname="$(basename "$0")"
@@ -30,10 +38,9 @@ $SHELL ./cmd ${1+"$@"} >out.actual 2>err.actual
 echo $? > exit.actual
 cd "$curdir"
 ex=0
-for act in $(children "$testdir" \*.actual); do
+for act in $(outputs "$testdir"); do
   exp="${act%.actual}.expected"
   diff="${act%.actual}.diff"
-  test -f "$exp" || continue
   diff -Nu --strip-trailing-cr "$exp" "$act" > "$diff.tmp"
   dex=$?
   if test 0 -ne $dex; then

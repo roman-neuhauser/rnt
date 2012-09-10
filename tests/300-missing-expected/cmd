@@ -1,0 +1,3 @@
+trap 'rm -f test/*.actual test/*.diff' EXIT
+
+$SHELL ${2?} $PWD/test

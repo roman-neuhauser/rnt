@@ -36,6 +36,9 @@ rm -f $(children . \*.diff)
 
 $SHELL ./cmd ${1+"$@"} >out.actual 2>err.actual
 echo $? > exit.actual
+test -f ./post && {
+  $SHELL ./post ${1+"$@"} >post.actual 2>&1
+}
 cd "$curdir"
 ex=0
 for act in $(outputs "$testdir"); do

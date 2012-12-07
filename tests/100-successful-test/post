@@ -1,0 +1,24 @@
+assert_nonexistent()
+{
+  if test -e "${1:?}"; then
+    echo "exists but should not: $1"
+  else
+    echo "nonexistent: $1"
+  fi
+}
+
+assert_nonexistent "test/err.actual"
+assert_nonexistent "test/err.diff"
+assert_nonexistent "test/err.diff.tmp"
+
+assert_nonexistent "test/exit.actual"
+assert_nonexistent "test/exit.diff"
+assert_nonexistent "test/exit.diff.tmp"
+
+assert_nonexistent "test/other.actual"
+assert_nonexistent "test/other.diff"
+assert_nonexistent "test/other.diff.tmp"
+
+assert_nonexistent "test/out.actual"
+assert_nonexistent "test/out.diff"
+assert_nonexistent "test/out.diff.tmp"

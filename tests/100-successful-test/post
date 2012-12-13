@@ -1,11 +1,4 @@
-assert_nonexistent()
-{
-  if test -e "${1:?}"; then
-    echo "exists but should not: $1"
-  else
-    echo "nonexistent: $1"
-  fi
-}
+. ../post.functions
 
 assert_nonexistent "test/err.actual"
 assert_nonexistent "test/err.diff"

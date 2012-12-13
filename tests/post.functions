@@ -1,0 +1,29 @@
+cleanup()
+{
+  rm -f "$PWD/test/exit.actual"
+  rm -f "$PWD/test/err.actual"
+  rm -f "$PWD/test/out.actual"
+  rm -f "$PWD/test/exit.diff"
+  rm -f "$PWD/test/err.diff"
+  rm -f "$PWD/test/out.diff"
+}
+
+assert_file()
+{
+  if test -e "${1:?}"; then
+    echo "present: $1"
+  else
+    echo "missing: $1"
+  fi
+}
+
+assert_nonexistent()
+{
+  assert_file ${1+"$@"}
+}
+
+assert_same()
+{
+  diff -u "${1:?}" "${2:?}"
+}
+

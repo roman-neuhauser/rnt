@@ -1,6 +1,6 @@
-exists: test/exit.actual
-exists: test/err.actual
-exists: test/out.actual
-exists: test/exit.diff
-exists: test/err.diff
-exists: test/out.diff
+present: test/exit.actual
+present: test/err.actual
+present: test/out.actual
+present: test/exit.diff
+present: test/err.diff
+present: test/out.diff

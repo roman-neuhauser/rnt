@@ -1,0 +1,12 @@
+present: test/out.actual
+present: test/err.actual
+present: test/exit.actual
+present: test/stray.actual
+missing: test/out.diff
+missing: test/err.diff
+present: test/exit.diff
+present: test/stray.diff
+missing: test/out.diff.tmp
+missing: test/err.diff.tmp
+missing: test/exit.diff.tmp
+missing: test/stray.diff.tmp

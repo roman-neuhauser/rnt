@@ -1,0 +1,4 @@
+--- test/exit.expected
++++ test/exit.actual
+@@ -0,0 +1 @@
++0

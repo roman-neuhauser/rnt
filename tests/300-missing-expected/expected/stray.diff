@@ -1,0 +1,4 @@
+--- test/stray.expected
++++ test/stray.actual
+@@ -0,0 +1 @@
++surprise

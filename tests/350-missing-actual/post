@@ -1,1 +1,24 @@
-rm -f test/*.actual test/*.diff
+. ../post.functions
+
+trap "rm -f test/*.actual test/*.diff" EXIT
+
+assert_file test/out.expected
+assert_file test/out.actual
+assert_file test/out.diff
+assert_file test/out.diff.tmp
+
+assert_file test/err.expected
+assert_file test/err.actual
+assert_file test/err.diff
+assert_file test/err.diff.tmp
+
+assert_file test/exit.expected
+assert_file test/exit.actual
+assert_file test/exit.diff
+assert_file test/exit.diff.tmp
+
+assert_file test/extra.expected
+assert_file test/extra.actual
+assert_file test/extra.diff
+assert_file test/extra.diff.tmp
+assert_same expected/extra.diff test/extra.diff

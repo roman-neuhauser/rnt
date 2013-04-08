@@ -2,12 +2,12 @@
 
 trap cleanup EXIT
 
-assert_file "test/exit.actual"
-assert_file "test/err.actual"
-assert_file "test/out.actual"
-assert_file "test/exit.diff"
-assert_file "test/err.diff"
-assert_file "test/out.diff"
+assert_fs -f "test/exit.actual"
+assert_fs -f "test/err.actual"
+assert_fs -f "test/out.actual"
+assert_fs -f "test/exit.diff"
+assert_fs -f "test/err.diff"
+assert_fs -f "test/out.diff"
 assert_same "expected/exit.diff" "test/exit.diff"
 assert_same "expected/err.diff" "test/err.diff"
 assert_same "expected/out.diff" "test/out.diff"

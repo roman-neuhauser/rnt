@@ -1,12 +1,12 @@
-missing: test/err.actual
-missing: test/err.diff
-missing: test/err.diff.tmp
-missing: test/exit.actual
-missing: test/exit.diff
-missing: test/exit.diff.tmp
-missing: test/other.actual
-missing: test/other.diff
-missing: test/other.diff.tmp
-missing: test/out.actual
-missing: test/out.diff
-missing: test/out.diff.tmp
+good: !e test/err.actual
+good: !e test/err.diff
+good: !e test/err.diff.tmp
+good: !e test/exit.actual
+good: !e test/exit.diff
+good: !e test/exit.diff.tmp
+good: !e test/other.actual
+good: !e test/other.diff
+good: !e test/other.diff.tmp
+good: !e test/out.actual
+good: !e test/out.diff
+good: !e test/out.diff.tmp

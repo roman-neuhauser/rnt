@@ -1,0 +1,11 @@
+test for assert_fs from tests/post.functions
+
+foof and food are existing file and directory,
+barf does not exist.
+
+assert_fs [T] P
+
+* T is an optional operator for test(1), defaults to "-e".
+  if the first character is "!" instead of "-", the test
+  is negated.
+* P is a filesystem path.

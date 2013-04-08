@@ -1,17 +1,17 @@
 . ../post.functions
 
-assert_nonexistent "test/err.actual"
-assert_nonexistent "test/err.diff"
-assert_nonexistent "test/err.diff.tmp"
+assert_fs !e "test/err.actual"
+assert_fs !e "test/err.diff"
+assert_fs !e "test/err.diff.tmp"
 
-assert_nonexistent "test/exit.actual"
-assert_nonexistent "test/exit.diff"
-assert_nonexistent "test/exit.diff.tmp"
+assert_fs !e "test/exit.actual"
+assert_fs !e "test/exit.diff"
+assert_fs !e "test/exit.diff.tmp"
 
-assert_nonexistent "test/other.actual"
-assert_nonexistent "test/other.diff"
-assert_nonexistent "test/other.diff.tmp"
+assert_fs !e "test/other.actual"
+assert_fs !e "test/other.diff"
+assert_fs !e "test/other.diff.tmp"
 
-assert_nonexistent "test/out.actual"
-assert_nonexistent "test/out.diff"
-assert_nonexistent "test/out.diff.tmp"
+assert_fs !e "test/out.actual"
+assert_fs !e "test/out.diff"
+assert_fs !e "test/out.diff.tmp"

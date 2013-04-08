@@ -1,0 +1,31 @@
+. ../post.functions
+
+assert_fs    foof
+assert_fs    food
+
+assert_fs -e foof
+assert_fs -e food
+
+assert_fs -f foof
+assert_fs -f food
+
+assert_fs -d foof
+assert_fs -d food
+
+assert_fs !e foof
+assert_fs !e food
+
+assert_fs !f foof
+assert_fs !f food
+
+assert_fs !d foof
+assert_fs !d food
+
+assert_fs    barf
+assert_fs -e barf
+assert_fs -f barf
+assert_fs -d barf
+assert_fs !e barf
+assert_fs !f barf
+assert_fs !d barf
+

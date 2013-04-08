@@ -8,18 +8,25 @@ cleanup()
   rm -f "$PWD/test/out.diff"
 }
 
-assert_file()
+assert_fs()
 {
-  if test -e "${1:?}"; then
-    echo "present: $1"
-  else
-    echo "missing: $1"
-  fi
-}
+  local ex=1 label=FAIL neg p t=-e tt
 
-assert_nonexistent()
-{
-  assert_file ${1+"$@"}
+  p="${1:?}"
+  if test $# -gt 1; then
+    t="${1:?}" p="${2:?}"
+  fi
+  tt="$t"
+  case "$t" in
+  !*) neg='!' t="-${t#!}" ;;
+  esac
+
+  if test $neg "$t" "$p"; then
+    ex=0
+    label=good
+  fi
+  printf "%s: %s %s\n" $label "$tt" "$p"
+  return $ex
 }
 
 assert_same()

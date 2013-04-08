@@ -1,6 +1,6 @@
-present: test/exit.actual
-present: test/err.actual
-present: test/out.actual
-present: test/exit.diff
-present: test/err.diff
-present: test/out.diff
+good: -f test/exit.actual
+good: -f test/err.actual
+good: -f test/out.actual
+good: -f test/exit.diff
+good: -f test/err.diff
+good: -f test/out.diff

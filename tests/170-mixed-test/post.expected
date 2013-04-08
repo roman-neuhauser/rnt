@@ -1,9 +1,9 @@
-present: test/out.actual
-present: test/err.actual
-present: test/exit.actual
-missing: test/out.diff
-present: test/err.diff
-present: test/exit.diff
-missing: test/out.diff.tmp
-missing: test/err.diff.tmp
-missing: test/exit.diff.tmp
+good: -f test/out.actual
+good: -f test/err.actual
+good: -f test/exit.actual
+good: !e test/out.diff
+good: -f test/err.diff
+good: -f test/exit.diff
+good: !e test/out.diff.tmp
+good: !e test/err.diff.tmp
+good: !e test/exit.diff.tmp

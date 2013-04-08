@@ -2,23 +2,23 @@
 
 trap "rm -f test/*.actual test/*.diff" EXIT
 
-assert_file test/out.expected
-assert_file test/out.actual
-assert_file test/out.diff
-assert_file test/out.diff.tmp
+assert_fs -f test/out.expected
+assert_fs -f test/out.actual
+assert_fs !f test/out.diff
+assert_fs !f test/out.diff.tmp
 
-assert_file test/err.expected
-assert_file test/err.actual
-assert_file test/err.diff
-assert_file test/err.diff.tmp
+assert_fs -f test/err.expected
+assert_fs -f test/err.actual
+assert_fs !f test/err.diff
+assert_fs !f test/err.diff.tmp
 
-assert_file test/exit.expected
-assert_file test/exit.actual
-assert_file test/exit.diff
-assert_file test/exit.diff.tmp
+assert_fs -f test/exit.expected
+assert_fs -f test/exit.actual
+assert_fs !f test/exit.diff
+assert_fs !f test/exit.diff.tmp
 
-assert_file test/extra.expected
-assert_file test/extra.actual
-assert_file test/extra.diff
-assert_file test/extra.diff.tmp
+assert_fs -f test/extra.expected
+assert_fs !f test/extra.actual
+assert_fs -f test/extra.diff
+assert_fs !f test/extra.diff.tmp
 assert_same expected/extra.diff test/extra.diff

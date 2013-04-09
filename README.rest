@@ -29,31 +29,73 @@ rnt_ is a tool for automated testing of command line interfaces.
 It comprises two shell scripts portable enough to run at least on
 FreeBSD, GNU/Linux and MSYS (Windows).
 
+rnt_ has notions of *test suite* and *test case*.
+
 .. _rnt: https://github.com/roman-neuhauser/rnt
 
-rnt_ has notions of "test suite" and "test case".
-A test suite is a directory containing zero or more test cases.
-A test case is a directory with a name matching `???-*`, containing
-at least a `cmd` file.
 
-For each test case, `run-test.sh` chdirs into the test case directory
-and runs `cmd`, storing stdout, stderr and the exit code in
+Test Suite
+**********
+
+A *test suite* is a directory containing zero or more *test cases*.
+
+
+Test Case
+*********
+
+A *test case* is an immediate *test suite* subdirectory with a name
+matching `^[0-9]{3}(-[a-z0-9]+)+$`, containing at least a `cmd` file.
+Besides `cmd`, a test case directory should contain these files:
+
+`README`
+  This file is output at the terminal if the test fails.
+`exit.expected`
+  Expected exit code.
+`out.expected`
+  Expected contents of standard output.
+`err.expected`
+  Expected contents of standard output.
+
+If any of the `*.expected` files is missing, it's treated as if it
+was present and empty.
+This means that a test case without `exit.expected` will always fail.
+
+
+Behavior
+********
+
+For each *test case*, `run-test.sh` chdirs into the test case
+directory and runs `cmd`, storing stdout, stderr and the exit code in
 `out.actual`, `err.actual` and `exit.actual`, respectively.
 After that, each pair of `foo.expected`, `foo.actual` gets diffed;
-if only one side exists, the other will be considered empty.
 If any pair has non-empty diff, the test is considered *failed*.
 
-`run-tests.sh` runs each case in the given suite, printing `.` (a dot)
-for a successful case, `F` for a failed one.
-After all test cases have been run, `run-tests.sh` prints details
-of failures (if any): for each failed test, its `README` file is
-output if it exists, followed by the diffs.
+`run-tests.sh` runs each *test case* in the given *test suite*,
+printing `.` (a dot) for a successful case, `F` for a failed one.
+After all *test cases* have been run, `run-tests.sh` prints details
+of failures if any: for each failed *test case*, its `README` file
+is output if it exists, followed by the diffs.
+
+`*.actual` and `*.diff` files of failed test cases are kept for
+examination.
 
 
 Installation
 ============
 
-Use `git submodule` in a project using git, `cp(1)` otherwise.
+Use `git submodule` in a project using git: ::
+
+  git submodule add https://github.com/roman-neuhauser/rnt.git rnt
+  git submodule init
+  git submodule update
+
+Or just keep a copy of `rnt` inside your project: ::
+
+  mkdir rnt
+  curl -s https://github.com/roman-neuhauser/rnt/tarball/master \
+  | tar -xzf - -C rnt --strip-components=1
+  svn add rnt
+  svn ci
 
 Modify your `Makefile` to include a `check` target of the following
 structure:

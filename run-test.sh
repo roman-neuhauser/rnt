@@ -41,13 +41,14 @@ test -f ./post && {
 }
 cd "$curdir"
 ex=0
+tab="$(printf '\t')"
 for act in $(outputs "$testdir"); do
   exp="${act%.actual}.expected"
   diff="${act%.actual}.diff"
   diff -Nu --strip-trailing-cr "$exp" "$act" > "$diff.tmp"
   dex=$?
   if test 0 -ne $dex; then
-    sed '1,2s/\t.*$//' < "$diff.tmp" > "$diff"
+    sed '1,2s/'"$tab"'.*$//' < "$diff.tmp" > "$diff"
     ex=$dex
   fi
   rm -f "$diff.tmp"

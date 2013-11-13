@@ -47,9 +47,9 @@ for act in $(outputs "$testdir"); do
   diff="${act%.actual}.diff"
   diff -Nu --strip-trailing-cr "$exp" "$act" > "$diff.tmp"
   dex=$?
+  ex=$(($ex + $dex))
   if test 0 -ne $dex; then
     sed '1,2s/'"$tab"'.*$//' < "$diff.tmp" > "$diff"
-    ex=$dex
   fi
   rm -f "$diff.tmp"
 done

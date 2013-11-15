@@ -40,6 +40,7 @@ test -f ./post && {
   $SHELL ./post ${1+"$@"} >post.actual 2>&1
 }
 cd "$curdir"
+diffs=
 ex=0
 tab="$(printf '\t')"
 for act in $(outputs "$testdir"); do
@@ -50,9 +51,13 @@ for act in $(outputs "$testdir"); do
   ex=$(($ex + $dex))
   if test 0 -ne $dex; then
     sed '1,2s/'"$tab"'.*$//' < "$diff.tmp" > "$diff"
+    diffs="$diffs $diff"
   fi
   rm -f "$diff.tmp"
 done
+
+test $ex -eq 0 && test -n "$diffs" && kill -ABRT $$
+test $ex -ne 0 && test -z "$diffs" && kill -ABRT $$
 
 if test 0 -eq $ex; then
   rm -f $(children "$testdir" \*.actual)

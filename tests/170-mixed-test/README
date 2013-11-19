@@ -1,8 +1,9 @@
 partially failing test case run
 
 if stdout, stderr or exit code does not match expectations,
-run-test.sh should not output anything on either stdout or
-stderr and its exit code should indicate failure.
+run-test.sh should output a concatenation of the test's README
+file and diffs of *.{expected,actual} file pairs.
+stderr should be empty, and the exitcode should be non-zero.
 
 this test excercises failing err, exit diffs; stdout matches
 expectation.  out.diff, out.diff.tmp should be gone

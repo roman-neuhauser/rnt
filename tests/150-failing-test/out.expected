@@ -1,0 +1,22 @@
+FAIL test
+
+# this README should be output by run-test.sh...
+# 
+# ... followed by {exit,out,err}.diff
+
+--- test/exit.expected
++++ test/exit.actual
+@@ -1 +1 @@
+-0
++42
+--- test/out.expected
++++ test/out.actual
+@@ -1 +1 @@
+-no output expected
++unexpected output
+--- test/err.expected
++++ test/err.actual
+@@ -1 +1 @@
+-no errors expected
++unexpected error
+

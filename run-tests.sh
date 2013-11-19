@@ -15,7 +15,9 @@ test -d "$testdir" && (cd "$testdir") || {
 
 cnt=0
 ex=0
-failures=
+fcnt=0
+trap 'rm -f $faillog' EXIT
+faillog=$(mktemp)
 
 list_tests()
 (
@@ -26,27 +28,20 @@ list_tests()
 
 for d in $(list_tests "${testdir%/}"); do
   cnt=$((cnt + 1))
-  "$SHELL" "$mypath/run-test.sh" "$d" ${1+"$@"}
+  "$SHELL" "$mypath/run-test.sh" "$d" ${1+"$@"} >> $faillog
   tex=$?
   if test 0 -eq $tex; then
     printf .
   else
     ex=$tex
     printf F
-    failures="$failures $d"
+    fcnt=$(($fcnt + 1))
   fi
 done
 
 test $cnt -gt 0 && printf "\n\n"
 
-fcnt=0
-for f in $failures; do
-  fcnt=$(($fcnt + 1))
-  printf "FAIL $f\n\n"
-  test -f "$f/README" && sed 's,^,# ,' "$f/README" && echo
-  find $f -mindepth 1 -maxdepth 1 -name \*.diff | xargs cat
-  printf "\n"
-done
+cat "$faillog"
 
 printf "tests: %d failed: %d\n" $cnt $fcnt
 exit $ex

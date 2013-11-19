@@ -61,6 +61,11 @@ test $ex -ne 0 && test -z "$diffs" && kill -ABRT $$
 
 if test 0 -eq $ex; then
   rm -f $(children "$testdir" \*.actual)
+else
+  printf "FAIL $testdir\n\n"
+  test -f "$testdir/README" && sed 's,^,# ,' "$testdir/README" && echo
+  children $testdir \*.diff | xargs cat
+  printf "\n"
 fi
 
 exit $ex

@@ -1,0 +1,3 @@
+this README should be output by run-test.sh...
+
+... followed by {exit,out,err}.diff

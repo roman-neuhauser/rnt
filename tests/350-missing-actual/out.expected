@@ -1,0 +1,7 @@
+FAIL test
+
+--- test/extra.expected
++++ test/extra.actual
+@@ -1 +0,0 @@
+-unmatched
+

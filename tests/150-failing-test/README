@@ -2,6 +2,7 @@ test for run-test.sh <failing-test>
 
 - exit code should indicate failure
 - stderr should be empty
-- stdout should be empty
-- for each of exit code, stdout, stderr that is different
-  from expected value, it should leave behind a diff file
+- stdout should be a concatenation of the test's README file
+  and diffs of *.{expected,actual} file pairs
+- nonempty *.diff files as well as their corresponding *.actual
+  files are kept

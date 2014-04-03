@@ -4,7 +4,7 @@
 
 children()
 {
-  find "${1?}" -mindepth 1 -maxdepth 1 -name "${2?}"
+  find "${1?}" -mindepth 1 -maxdepth 1 -name "${2?}" | sort
 }
 outputs()
 {
@@ -12,7 +12,7 @@ outputs()
   {
     children "$testdir" \*.expected | sed 's#expected$#actual#'
     children "$testdir" \*.actual
-  } | sort
+  } | sort -u
 }
 
 myname="$(basename "$0")"

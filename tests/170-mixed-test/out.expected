@@ -1,13 +1,13 @@
 FAIL test
 
---- test/exit.expected
-+++ test/exit.actual
-@@ -1 +1 @@
--69
-+0
 --- test/err.expected
 +++ test/err.actual
 @@ -1 +1 @@
 -no errors expected
 +unexpected error
+--- test/exit.expected
++++ test/exit.actual
+@@ -1 +1 @@
+-69
++0
 

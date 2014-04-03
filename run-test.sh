@@ -12,7 +12,7 @@ outputs()
   {
     children "$testdir" \*.expected | sed 's#expected$#actual#'
     children "$testdir" \*.actual
-  } | sort
+  } | sort -u
 }
 
 myname="$(basename "$0")"

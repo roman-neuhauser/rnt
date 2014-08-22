@@ -111,3 +111,19 @@ structure:
   passed to each test.
 
 
+Alternatives
+============
+
+`rnt` is quite different from a number of other shell-oriented
+testing tools like
+
+* `Bats`_
+* `cram`_
+* `roundup`_
+* `sharness`_
+
+.. _`Bats`: https://github.com/sstephenson/bats
+.. _`cram`: https://bitheap.org/cram
+.. _`roundup`: https://bmizerany.github.io/roundup
+.. _`sharness`: https://github.com/mlafeldt/sharness
+

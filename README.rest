@@ -38,17 +38,19 @@ Test Suite
 **********
 
 A *test suite* is a directory containing zero or more *test cases*.
-
+A *test suite* may contain other entries beside *test cases*, they
+will be ignored.
 
 Test Case
 *********
 
 A *test case* is an immediate *test suite* subdirectory with a name
-matching `^[0-9]{3}(-[a-z0-9]+)+$`, containing at least a `cmd` file.
-Besides `cmd`, a test case directory should contain these files:
+matching `^[0-9]{3}(-[a-z0-9]+)+$`.  It should contain these files:
 
 `README`
   This file is output at the terminal if the test fails.
+`cmd`
+  A script with the command(s) under test.
 `exit.expected`
   Expected exit code.
 `out.expected`
@@ -56,28 +58,43 @@ Besides `cmd`, a test case directory should contain these files:
 `err.expected`
   Expected contents of standard output.
 
+`cmd` is required, the remaining files are optional (with a caveat
+about `exit.expected`, see below).
 If any of the `*.expected` files is missing, it's treated as if it
 was present and empty.
-This means that a test case without `exit.expected` will always fail.
-
+A *test case* may contain other files matching `*.expected`, these
+are treated the same as the usual `*.expected` files listed above
+(see below).
+Any number of other files and directories may be present in the test
+case directory.
 
 Behavior
 ********
 
-For each *test case*, `run-test.sh` chdirs into the test case
-directory and runs `cmd`, storing stdout, stderr and the exit code in
+*rnt* runs each *test case* in the given *test suite*, printing `.`
+(a dot) for a successful case, `F` for a failed one.
+After all *test cases* have been run, *rnt* prints details of failures
+if any: for each failed *test case*, its `README` file is output if it
+exists, followed by the diffs.
+
+For each *test case*, *rnt* chdirs into the test case directory
+and runs `cmd`, storing stdout, stderr and the exit code in
 `out.actual`, `err.actual` and `exit.actual`, respectively.
-After that, each pair of `foo.expected`, `foo.actual` gets diffed;
-If any pair has non-empty diff, the test is considered *failed*.
 
-`run-tests.sh` runs each *test case* in the given *test suite*,
-printing `.` (a dot) for a successful case, `F` for a failed one.
-After all *test cases* have been run, `run-tests.sh` prints details
-of failures if any: for each failed *test case*, its `README` file
-is output if it exists, followed by the diffs.
+Then, `rnt` gathers all `*.actual` and `*.expected` files in the test
+case directory.  The list of files considered is *not* limited to the
+`out.*`, `err.*` and `exit.*` files listed above: all files with
+either of those two extensions are included.
+It's not necessary for both `foo.expected` and `foo.actual` to be
+present; if either side is missing, it's treated as present and empty.
 
-`*.actual` and `*.diff` files of failed test cases are kept for
-examination.
+Each pair of `foo.expected`, `foo.actual` gets diffed; if any pair has
+non-empty diff, the test is considered to have *failed*.
+Note that since the actual exit code always a number (never the empty
+string), a test case without `exit.expected` will always fail.
+
+`*.actual` and `*.diff` files of successful tests are removed, while
+failed test cases are left as-is for examination.
 
 
 Installation

@@ -83,19 +83,40 @@ examination.
 Installation
 ============
 
-Use `git submodule` in a project using git: ::
+Git Subtree
+***********
+
+Use `git subtree` in a project using Git::
+
+  git remote add rnt https://github.com/roman-neuhauser/rnt.git
+  git subtree add -P rnt --squash rnt master
+
+Git Submodule
+*************
+
+This method has several disadvantages: submodule trees do not show up
+in *git-archive(1)* output, and working copies of such a repository
+need to be created with `git clone --recursive`, otherwise
+`git submodule update --init` is necessary to clone and check out
+the submodule.  ::
 
   git submodule add https://github.com/roman-neuhauser/rnt.git rnt
-  git submodule init
-  git submodule update
+  git submodule update --init
 
-Or just keep a copy of `rnt` inside your project: ::
+Plain Old Copy
+**************
+
+Using another versioning control system? ::
 
   mkdir rnt
   curl -s https://github.com/roman-neuhauser/rnt/tarball/master \
   | tar -xzf - -C rnt --strip-components=1
   svn add rnt
   svn ci
+
+
+Integration
+===========
 
 Modify your `Makefile` to include a `check` target of the following
 structure:

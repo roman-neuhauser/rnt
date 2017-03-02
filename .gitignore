@@ -3,3 +3,5 @@
 README.html
 tests/*/*.actual
 tests/*/*/*.actual
+tests/*/*/*/*.actual
+tests/*/*/*/*.diff

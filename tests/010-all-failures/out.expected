@@ -1,0 +1,17 @@
+FF
+
+FAIL tests/01-fail
+
+--- tests/01-fail/exit.expected
++++ tests/01-fail/exit.actual
+@@ -0,0 +1 @@
++1
+
+FAIL tests/02-fail
+
+--- tests/02-fail/exit.expected
++++ tests/02-fail/exit.actual
+@@ -0,0 +1 @@
++1
+
+tests: 2 failed: 2

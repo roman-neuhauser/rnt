@@ -46,6 +46,8 @@ tab="$(printf '\t')"
 for act in $(outputs "$testdir"); do
   exp="${act%.actual}.expected"
   diff="${act%.actual}.diff"
+  [ -f "$exp" ] || exp=/dev/null
+  [ -f "$act" ] || act=/dev/null
   diff -Nu --strip-trailing-cr "$exp" "$act" > "$diff.tmp"
   dex=$?
   ex=$(($ex + $dex))

@@ -1,4 +1,4 @@
---- test/stray.expected
+--- /dev/null
 +++ test/stray.actual
 @@ -0,0 +1 @@
 +surprise

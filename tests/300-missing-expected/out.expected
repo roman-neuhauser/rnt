@@ -1,10 +1,10 @@
 FAIL test
 
---- test/exit.expected
+--- /dev/null
 +++ test/exit.actual
 @@ -0,0 +1 @@
 +0
---- test/stray.expected
+--- /dev/null
 +++ test/stray.actual
 @@ -0,0 +1 @@
 +surprise

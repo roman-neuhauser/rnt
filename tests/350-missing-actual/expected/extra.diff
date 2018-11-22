@@ -1,4 +1,4 @@
 --- test/extra.expected
-+++ test/extra.actual
++++ /dev/null
 @@ -1 +0,0 @@
 -unmatched

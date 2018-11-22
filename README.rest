@@ -90,7 +90,7 @@ present; if either side is missing, it's treated as present and empty.
 
 Each pair of `foo.expected`, `foo.actual` gets diffed; if any pair has
 non-empty diff, the test is considered to have *failed*.
-Note that since the actual exit code always a number (never the empty
+Note that since the actual exit code is always a number (never the empty
 string), a test case without `exit.expected` will always fail.
 
 `*.actual` and `*.diff` files of successful tests are removed, while

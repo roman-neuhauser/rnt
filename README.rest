@@ -9,7 +9,7 @@
 ----------------------------------------------------------------------
 
 :Author: Roman Neuhauser
-:Contact: rneuhauser@suse.cz
+:Contact: rn+rnt@sigpipe.cz
 :Copyright: This document is in the public domain.
 
 .. This file is marked up using reStructuredText.

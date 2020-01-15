@@ -14,8 +14,8 @@
 
 print_section() # {{{
 {
-  local -r s="${1?}" self=${0##*/}
-  sed -rnf - ${0} <<EOSED
+  local s="${1?}" self=${0##*/}
+  sed -rnf /dev/stdin ${0} <<EOSED
     /^### $s START/,/^### $s END/ {
       s:\\\$0:$self:
       s:^#( |$)::p
